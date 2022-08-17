@@ -7,6 +7,8 @@
         "test": "test"
     },
     "scripts": {
+        "build": "spago build",
+        "build-deps": "spago build --deps-only",
         "bundle": "npm run bundle:spago && npm run bundle:open",
         "bundle:spago": "spago bundle-app -t dist/index.js",
         "bundle:open": "cd dist; python -m http.server",
