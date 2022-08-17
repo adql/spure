@@ -1,0 +1,24 @@
+{
+    "name": "spure",
+    "version": "0.0.1-pre1",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "bundle": "npm run bundle:spago && npm run bundle:open",
+        "bundle:spago": "spago bundle-app -t dist/index.js",
+        "bundle:open": "cd dist; python -m http.server",
+        "dev": "parcel dev/parcel/index.html --open --dist-dir ./dev"
+    },
+    "author": "Amir Dekel",
+    "devDependencies": {
+        "parcel": "^2.6.2",
+        "process": "^0.11.10"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    }
+}
