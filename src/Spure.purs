@@ -35,14 +35,13 @@ mkSpure = component "Spure" \_ -> R.do
         pure mempty
   
   pure $ D.div { id:"container"
-               , children: [ D.textarea { ref: spureRef
-                                        , id: "spure"
-                                        , spellCheck: false
-                                        , rows: 1
-                                        , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
-                                        , onMouseDown: capture target handleMouseDown
-                                        , onContextMenu: capture_ $ pure unit
-                                        }
+               , children: [ D.input { ref: spureRef
+                                     , id: "spure"
+                                     , spellCheck: false
+                                     , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
+                                     , onMouseDown: capture target handleMouseDown
+                                     , onContextMenu: capture_ $ pure unit
+                                     }
                            ]
                }
 
