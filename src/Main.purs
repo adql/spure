@@ -2,10 +2,13 @@ module Main where
 
 import Prelude
 
+import Data.Array (snoc)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Console (error)
 import React.Basic.DOM.Client (createRoot, renderRoot)
+import React.Basic.Hooks (Component, Reducer, component, mkReducer, useReducer, (/\))
+import React.Basic.Hooks as R
 import Spure (mkSpure)
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
@@ -20,5 +23,16 @@ main = do
     Nothing -> error "No app element found"
     Just app -> do
       root <- createRoot app
-      spure <- mkSpure
-      renderRoot root $ spure unit
+      spureApp <- mkApp
+      renderRoot root $ spureApp unit
+
+mkTextReducer :: Effect (Reducer (Array String) String)
+mkTextReducer = mkReducer snoc
+
+mkApp :: Component Unit
+mkApp = do
+  spure <- mkSpure
+  reducer <- mkTextReducer
+  component "App" \_ -> R.do
+    text /\ dispatch <- useReducer [] reducer
+    pure $ spure { dispatch }
