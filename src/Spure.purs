@@ -22,9 +22,6 @@ import Web.HTML.HTMLInputElement as HtmlIE
 import Web.UIEvent.InputEvent (fromEvent)
 import Web.UIEvent.InputEvent.EventTypes (beforeinput)
 
-mkTextReducer :: Effect (Reducer (Array String) String)
-mkTextReducer = mkReducer snoc
-
 mkSpure :: Component Unit
 mkSpure = mkReducer snoc >>= \textReducer ->
   component "Spure" \_ -> R.do
