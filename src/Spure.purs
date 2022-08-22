@@ -48,16 +48,13 @@ mkSpure = component "Spure" \{dispatch} -> R.do
       Nothing -> pure mempty
       Just node -> beforeInputHandler node *> pure mempty
     
-  pure $ D.div { id:"container"
-               , children: [ D.input { ref: spureRef
-                                     , id: "spure"
-                                     , spellCheck: false
-                                     , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
-                                     , onMouseDown: capture target handleMouseDown
-                                     , onContextMenu: capture_ $ pure unit
-                                     }
-                           ]
-               }
+  pure $ D.input { ref: spureRef
+                 , id: "spure"
+                 , spellCheck: false
+                 , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
+                 , onMouseDown: capture target handleMouseDown
+                 , onContextMenu: capture_ $ pure unit
+                 }
 
 forbiddenKeyValues :: Array String
 forbiddenKeyValues = [ "ArrowDown"
