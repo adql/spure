@@ -28,21 +28,17 @@ main = do
       spureApp <- mkApp
       renderRoot root $ spureApp unit
 
-mkTextReducer :: Effect (Reducer (Array String) String)
-mkTextReducer = mkReducer snoc
-
 mkApp :: Component Unit
 mkApp = do
   spure <- mkSpure
   doneButton <- mkDoneButton
   output <- mkOutput
-  reducer <- mkTextReducer
   component "App" \_ -> R.do
     done /\ setDone <- useState false
-    text /\ dispatch <- useReducer [] reducer
+    text /\ setText <- useState []
 
     pure $ fragment [ D.div { id:"main-ui"
-                            , children: [ spure { dispatch }
+                            , children: [ spure { setText }
                                         , doneButton { setDone }
                                         ]
                             }

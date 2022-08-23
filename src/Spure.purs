@@ -22,8 +22,9 @@ import Web.HTML.HTMLInputElement as HtmlIE
 import Web.UIEvent.InputEvent (fromEvent)
 import Web.UIEvent.InputEvent.EventTypes (beforeinput)
 
-mkSpure :: Component { dispatch::String -> Effect Unit }
-mkSpure = component "Spure" \{dispatch} -> R.do
+mkSpure :: Component { setText::
+                          (Array String -> Array String) -> Effect Unit }
+mkSpure = component "Spure" \{setText} -> R.do
   spureRef <- useRef null
 
   let beforeInputHandler :: Node -> Effect Unit
@@ -38,7 +39,7 @@ mkSpure = component "Spure" \{dispatch} -> R.do
               "insertLineBreak" -> do
                 newParagraph <- HtmlIE.value inputElem
                 HtmlIE.setValue "" inputElem
-                dispatch newParagraph
+                setText (_ <> [newParagraph])
               otherwise -> preventDefault e
           addEventListener beforeinput eListener true eTarget
 
