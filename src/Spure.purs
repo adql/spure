@@ -6,6 +6,7 @@ import Prelude
 import Data.Array (elem)
 import Data.Maybe (Maybe(..), fromJust)
 import Data.Nullable (null)
+import Data.String as S
 import Effect (Effect)
 import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
@@ -39,7 +40,8 @@ mkSpure = component "Spure" \{setText} -> R.do
               "insertLineBreak" -> do
                 newParagraph <- HtmlIE.value inputElem
                 HtmlIE.setValue "" inputElem
-                setText (_ <> [newParagraph])
+                if not (S.null newParagraph) then setText (_ <> [newParagraph])
+                  else pure unit
               _ -> preventDefault e
           addEventListener beforeinput eListener true eTarget
 
