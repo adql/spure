@@ -40,7 +40,7 @@ mkSpure = component "Spure" \{setText} -> R.do
                 newParagraph <- HtmlIE.value inputElem
                 HtmlIE.setValue "" inputElem
                 setText (_ <> [newParagraph])
-              otherwise -> preventDefault e
+              _ -> preventDefault e
           addEventListener beforeinput eListener true eTarget
 
   useEffectOnce do
