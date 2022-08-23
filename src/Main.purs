@@ -11,7 +11,7 @@ import React.Basic.DOM.Client (createRoot, renderRoot)
 import React.Basic.Hooks (Component, Reducer, component, fragment, mkReducer, useReducer, useState, (/\))
 import React.Basic.Hooks as R
 import Spure (mkSpure)
-import Spure.UI (mkDoneButton, mkOutput)
+import Spure.UI (mkDoneButton, mkOutput, mkResetButton)
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (toNonElementParentNode)
@@ -32,6 +32,7 @@ mkApp :: Component Unit
 mkApp = do
   spure <- mkSpure
   doneButton <- mkDoneButton
+  resetButton <- mkResetButton
   output <- mkOutput
   component "App" \_ -> R.do
     done /\ setDone <- useState false
@@ -39,7 +40,9 @@ mkApp = do
 
     pure $ fragment [ D.div { id:"main-ui"
                             , children: [ spure { setText }
-                                        , doneButton { setDone }
+                                        , if done
+                                          then resetButton { setDone, setText }
+                                          else doneButton { setDone }
                                         ]
                             }
                     , output { text, done }

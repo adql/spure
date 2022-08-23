@@ -16,6 +16,16 @@ mkDoneButton = component "SpureButton" \{setDone} -> R.do
                   , children: [D.text "Spure!"]
                   }
 
+mkResetButton :: Component { setDone::(Boolean -> Boolean) -> Effect Unit
+                           , setText::(Array String -> Array String) -> Effect Unit
+                           }
+mkResetButton = component "ResetButton"
+                \{ setDone, setText } -> R.do
+  pure $ D.button { onClick: handler_ $ setDone (\_ -> false) *>
+                                        setText (\_ -> [])
+                  , children: [D.text "Reset"]
+                  }
+
 mkOutput :: Component { text::Array String, done::Boolean}
 mkOutput = component "Output" \props -> R.do
   pure $ if props.done
