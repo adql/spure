@@ -2,13 +2,12 @@ module Main where
 
 import Prelude
 
-import Data.Array (snoc)
 import Data.Maybe (Maybe(..))
 import Effect (Effect)
 import Effect.Console (error)
 import React.Basic.DOM as D
 import React.Basic.DOM.Client (createRoot, renderRoot)
-import React.Basic.Hooks (Component, Reducer, component, fragment, mkReducer, useReducer, useState, (/\))
+import React.Basic.Hooks (Component, component, fragment, useState, (/\))
 import React.Basic.Hooks as R
 import Spure (mkSpure)
 import Spure.UI (mkDoneButton, mkOutput, mkResetButton)
