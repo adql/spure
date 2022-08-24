@@ -39,7 +39,7 @@ mkApp = do
     text /\ setText <- useState []
 
     pure $ fragment [ D.div { id:"main-ui"
-                            , children: [ spure { setText }
+                            , children: [ spure { setText, done }
                                         , if done
                                           then resetButton { setDone, setText }
                                           else doneButton { setDone }

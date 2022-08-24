@@ -25,9 +25,11 @@ import Web.HTML.HTMLInputElement as HtmlIE
 import Web.UIEvent.InputEvent (fromEvent)
 import Web.UIEvent.InputEvent.EventTypes (beforeinput)
 
-mkSpure :: Component { setText::
-                          (Array String -> Array String) -> Effect Unit }
-mkSpure = component "Spure" \{setText} -> R.do
+mkSpure :: Component { setText ::
+                          (Array String -> Array String) -> Effect Unit
+                     , done :: Boolean
+                     }
+mkSpure = component "Spure" \{setText, done} -> R.do
   let appendParagraph :: HTMLInputElement -> Effect Unit
       appendParagraph inputElem = do
         newParagraph <- HtmlIE.value inputElem
@@ -36,6 +38,15 @@ mkSpure = component "Spure" \{setText} -> R.do
           else pure unit
 
   spureRef <- useControlledInput appendParagraph
+
+  useEffect done $ 
+    if done
+    then do
+      node <- map (unsafePartial fromJust) $ readRefMaybe spureRef
+      let inputElem = (unsafePartial fromJust) $ HtmlIE.fromNode node
+      appendParagraph inputElem
+      pure mempty
+    else pure mempty
 
   pure $ D.input { ref: spureRef
                  , id: "spure"
