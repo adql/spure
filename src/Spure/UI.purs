@@ -6,13 +6,13 @@ import Prelude
 import Data.Array (singleton)
 import Effect (Effect)
 import React.Basic.DOM as D
-import React.Basic.Events (handler_)
+import React.Basic.DOM.Events (capture_)
 import React.Basic.Hooks (Component, component, empty)
 import React.Basic.Hooks as R
 
 mkDoneButton :: Component { setDone::(Boolean -> Boolean) -> Effect Unit }
 mkDoneButton = component "SpureButton" \{setDone} -> R.do
-  pure $ D.button { onClick: handler_ $ setDone \_ -> true
+  pure $ D.button { onClick: capture_ $ setDone \_ -> true
                   , children: [D.text "Spure!"]
                   }
 
@@ -21,7 +21,7 @@ mkResetButton :: Component { setDone::(Boolean -> Boolean) -> Effect Unit
                            }
 mkResetButton = component "ResetButton"
                 \{ setDone, setText } -> R.do
-  pure $ D.button { onClick: handler_ $ setDone (\_ -> false) *>
+  pure $ D.button { onClick: capture_ $ setDone (\_ -> false) *>
                                         setText (\_ -> [])
                   , children: [D.text "Reset"]
                   }
