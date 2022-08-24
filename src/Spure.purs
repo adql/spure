@@ -51,6 +51,7 @@ mkSpure = component "Spure" \{setText, done} -> R.do
   pure $ D.input { ref: spureRef
                  , id: "spure"
                  , spellCheck: false
+                 , hidden: if done then true else false
                  , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
                  , onMouseDown: capture target handleMouseDown
                  , onContextMenu: capture_ $ pure unit
