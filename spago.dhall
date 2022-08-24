@@ -16,6 +16,7 @@ to generate this file without the comments in this block.
   , "console"
   , "effect"
   , "maybe"
+  , "media-types"
   , "newtype"
   , "nullable"
   , "partial"
@@ -26,6 +27,7 @@ to generate this file without the comments in this block.
   , "strings"
   , "web-dom"
   , "web-events"
+  , "web-file"
   , "web-html"
   , "web-uievents"
   ]
