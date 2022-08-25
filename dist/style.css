@@ -1,2 +1,13 @@
-#spure {
+main {
+    width: 600px;
+    margin: 200px auto 0;
+}
+
+main.done {
+    margin-top: 0;
+}
+
+#main-ui {
+    width: fit-content;
+    margin: auto;
 }
