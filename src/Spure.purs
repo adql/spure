@@ -8,6 +8,7 @@ import Data.Maybe (Maybe(..), fromJust)
 import Data.Newtype (class Newtype)
 import Data.Nullable (Nullable, null)
 import Data.String as S
+import Data.String.CodeUnits (takeRight)
 import Effect (Effect)
 import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
@@ -78,11 +79,19 @@ useControlledInput handleLineBreak = coerceHook R.do
           case inputType inputE of
             "insertText" -> pure unit
             "insertLineBreak" -> handleLineBreak inputElem
+            "deleteContentBackward" -> filterDeletion inputElem e
             _ -> preventDefault e
         addEventListener beforeinput eListener true eTarget
         pure mempty
 
   pure spureRef
+
+filterDeletion :: HTMLInputElement -> Event -> Effect Unit
+filterDeletion inputElem e = do
+  value <- HtmlIE.value inputElem
+  if takeRight 1 value == " "
+    then preventDefault e
+    else pure unit
 
 forbiddenKeyValues :: Array String
 forbiddenKeyValues = [ "ArrowDown"
