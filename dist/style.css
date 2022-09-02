@@ -1,6 +1,10 @@
-main {
+body {
     width: 600px;
-    margin: 200px auto 0;
+    margin: auto;
+}
+
+main {
+    margin-top: 200px;
 }
 
 main.done {
