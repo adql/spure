@@ -37,6 +37,7 @@ main.done {
     width: 12em;
     border-width: 0px;
     border-bottom: 1px solid black;
+    transition: border-color 0.1s 0.5s;
 }
 
 #spure:focus {
