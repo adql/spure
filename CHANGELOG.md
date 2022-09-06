@@ -11,6 +11,7 @@
 
 - A fairly decent look and feel
 - Minification + minor changes in build scripts.
+- The style sheet is now build and bundled from `src` as well
 
 ## [0.1.0] 2022-08-25
 
