@@ -56,6 +56,8 @@ mkSpure = component "Spure" \{setText, done} -> R.do
                  , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
                  , onMouseDown: capture target handleMouseDown
                  , onContextMenu: capture_ $ pure unit
+                 , required: true
+                 , autoFocus: true
                  }
 
 newtype UseControlledInput hooks =
