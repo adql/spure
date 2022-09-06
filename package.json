@@ -9,7 +9,8 @@
     "scripts": {
         "build": "spago build",
         "build-deps": "spago build --deps-only",
-        "bundle": "npm run bundle:spago && npm run bundle:open",
+        "bundle": "npm run bundle:css && npm run bundle:spago && npm run bundle:open",
+        "bundle:css": "esbuild --bundle src/style.css --outfile=dist/style.css --minify",
         "bundle:spago": "spago bundle-app -t dist/index.js --minify",
         "bundle:open": "cd dist; python -m http.server",
         "dev": "parcel index.html --open --dist-dir dev"
