@@ -54,7 +54,6 @@ mkSpure = component "Spure" \{setText, done} -> R.do
                  , spellCheck: false
                  , hidden: if done then true else false
                  , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
-                 , onMouseDown: capture target handleMouseDown
                  , onContextMenu: capture_ $ pure unit
                  , required: true
                  , autoFocus: true
@@ -111,6 +110,3 @@ handleKeyDown { key, nativeEvent } =
   if (unsafePartial fromJust) key `elem` forbiddenKeyValues
   then preventDefault nativeEvent
   else pure unit
-
-handleMouseDown :: EventTarget -> Effect Unit
-handleMouseDown = focus <<< (unsafePartial fromJust) <<< fromEventTarget

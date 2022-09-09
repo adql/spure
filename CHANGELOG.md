@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- Use CSS instead of `onMouseDown` event to prevent selection or caret control with the mouse.
+
 ## [0.2.0] 2022-09-06
 
 ### Added
