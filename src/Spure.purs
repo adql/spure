@@ -13,16 +13,15 @@ import Data.String.CodeUnits (takeRight)
 import Effect (Effect)
 import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
-import React.Basic.DOM.Events (capture, capture_, key, nativeEvent, target)
+import React.Basic.DOM.Events (capture_, key, nativeEvent)
 import React.Basic.Events (handler, merge)
 import React.Basic.Hooks (Component, Hook, Ref, UseEffect, UseRef, coerceHook, component, readRefMaybe, useEffect, useRef)
 import React.Basic.Hooks as R
 import Spure.Internal.InputEvent (inputType)
 import Web.DOM.Node (Node, toEventTarget)
 import Web.Event.Event (Event, preventDefault)
-import Web.Event.EventTarget (EventTarget, addEventListener, eventListener)
+import Web.Event.EventTarget (addEventListener, eventListener)
 import Web.HTML (HTMLInputElement)
-import Web.HTML.HTMLElement (focus, fromEventTarget)
 import Web.HTML.HTMLInputElement as HtmlIE
 import Web.UIEvent.InputEvent (fromEvent)
 import Web.UIEvent.InputEvent.EventTypes (beforeinput)
