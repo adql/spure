@@ -7,6 +7,7 @@ import Data.Array (elem)
 import Data.Maybe (Maybe(..), fromJust)
 import Data.Newtype (class Newtype)
 import Data.Nullable (Nullable, null)
+import Data.String (length)
 import Data.String as S
 import Data.String.CodeUnits (takeRight)
 import Effect (Effect)
@@ -78,7 +79,7 @@ useControlledInput handleLineBreak = coerceHook R.do
         eListener <- eventListener \e -> do
           let inputE = (unsafePartial fromJust) $ fromEvent e
           case inputType inputE of
-            "insertText" -> pure unit
+            "insertText" -> collapseSelection inputElem
             "insertLineBreak" -> handleLineBreak inputElem
             "deleteContentBackward" -> filterDeletion inputElem e
             _ -> preventDefault e
@@ -89,6 +90,7 @@ useControlledInput handleLineBreak = coerceHook R.do
 
 filterDeletion :: HTMLInputElement -> Event -> Effect Unit
 filterDeletion inputElem e = do
+  collapseSelection inputElem
   value <- HtmlIE.value inputElem
   if takeRight 1 value == " "
     then preventDefault e
@@ -110,3 +112,7 @@ handleKeyDown { key, nativeEvent } =
   if (unsafePartial fromJust) key `elem` forbiddenKeyValues
   then preventDefault nativeEvent
   else pure unit
+
+collapseSelection :: HTMLInputElement -> Effect Unit
+collapseSelection inputElem = HtmlIE.value inputElem >>= \value ->
+  HtmlIE.setSelectionStart (length value) inputElem

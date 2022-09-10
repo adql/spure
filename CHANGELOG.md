@@ -5,6 +5,7 @@
 ### Changed
 
 - Use CSS instead of `onMouseDown` event to prevent selection or caret control with the mouse.
+- Prevent accidentally deleting the text by selecting it with `ctrl-a` and typing.
 
 ## [0.2.0] 2022-09-06
 
