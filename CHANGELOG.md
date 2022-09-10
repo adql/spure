@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Hide (so far only) UI element while writing (with a mechanism to hide elements that will be added later).
+
 ### Changed
 
 - Use CSS instead of `onMouseDown` event to prevent selection or caret control with the mouse.

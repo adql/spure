@@ -14,9 +14,13 @@ import React.Basic.Hooks as R
 import Utils.FileSaver (saveBlobAs)
 import Web.File.Blob (fromString)
 
-mkDoneButton :: Component { setDone::(Boolean -> Boolean) -> Effect Unit }
-mkDoneButton = component "SpureButton" \{setDone} -> R.do
-  pure $ D.button { onClick: capture_ $ setDone \_ -> true
+mkDoneButton :: Component { setDone :: (Boolean -> Boolean) -> Effect Unit
+                          , writing :: Boolean
+                          }
+mkDoneButton = component "SpureButton" \{setDone, writing} -> R.do
+  pure $ D.button { id: "done-button"
+                  , className: if writing then "writing-invisible" else "writing-visible"
+                  , onClick: capture_ $ setDone \_ -> true
                   , children: [D.text "Spure!"]
                   }
 

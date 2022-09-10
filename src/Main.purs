@@ -35,14 +35,15 @@ mkApp = do
   resetButton <- mkResetButton
   output <- mkOutput
   component "App" \_ -> R.do
+    writing /\ setWriting <- useState false
     done /\ setDone <- useState false
     text /\ setText <- useState []
-
+    
     pure $ D.main { className: if done then "done" else ""
                   , children: [ D.div { id:"main-ui"
-                                      , children: [ spure { setText, done }
+                                      , children: [ spure { setWriting, setText, done }
                                                   , if not done
-                                                    then doneButton { setDone }
+                                                    then doneButton { setDone, writing }
                                                     else fragment [ saveButton { text }
                                                                   , resetButton { setDone, setText }
                                                                   ]

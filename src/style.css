@@ -49,3 +49,27 @@ main.done {
     border-color: transparent;
     transition: border-color 0.5s 2s;
 }
+
+#done-button.writing-visible {
+    width: 4em;
+}
+
+#done-button.writing-invisible {
+    width: 0;
+    padding-left: 0; padding-right: 0;
+    overflow: hidden;
+    transition-property: width, padding-left, padding-right, opacity;
+}
+
+.writing-visible {
+    opacity: initial;
+    transition-property: opacity;
+    transition-duration: 0.2s;
+}
+
+.writing-invisible {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-delay: 1s;
+}

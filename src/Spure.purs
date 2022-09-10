@@ -14,7 +14,7 @@ import Effect (Effect)
 import Partial.Unsafe (unsafePartial)
 import React.Basic.DOM as D
 import React.Basic.DOM.Events (capture_, key, nativeEvent)
-import React.Basic.Events (handler, merge)
+import React.Basic.Events (handler, handler_, merge)
 import React.Basic.Hooks (Component, Hook, Ref, UseEffect, UseRef, coerceHook, component, readRefMaybe, useEffect, useRef)
 import React.Basic.Hooks as R
 import Spure.Internal.InputEvent (inputType)
@@ -26,11 +26,13 @@ import Web.HTML.HTMLInputElement as HtmlIE
 import Web.UIEvent.InputEvent (fromEvent)
 import Web.UIEvent.InputEvent.EventTypes (beforeinput)
 
-mkSpure :: Component { setText ::
+mkSpure :: Component { setWriting ::
+                          (Boolean -> Boolean) -> Effect Unit
+                     , setText ::
                           (Array String -> Array String) -> Effect Unit
                      , done :: Boolean
                      }
-mkSpure = component "Spure" \{setText, done} -> R.do
+mkSpure = component "Spure" \{setWriting, setText, done} -> R.do
   let appendParagraph :: HTMLInputElement -> Effect Unit
       appendParagraph inputElem = do
         newParagraph <- HtmlIE.value inputElem
@@ -55,6 +57,8 @@ mkSpure = component "Spure" \{setText, done} -> R.do
                  , hidden: if done then true else false
                  , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
                  , onContextMenu: capture_ $ pure unit
+                 , onChange: handler_ $ setWriting $ \_ -> true
+                 , onBlur: handler_ $ setWriting $ \_ -> false
                  , required: true
                  , autoFocus: true
                  }
