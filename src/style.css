@@ -58,6 +58,11 @@ main.done {
     transition: border-color 0.5s 2s;
 }
 
+#done-button {
+    transition-property: width, padding-left, padding-right, opacity;
+    overflow: hidden;
+}
+
 #done-button.writing-visible {
     width: 4em;
 }
@@ -65,19 +70,21 @@ main.done {
 #done-button.writing-invisible {
     width: 0;
     padding-left: 0; padding-right: 0;
-    overflow: hidden;
-    transition-property: width, padding-left, padding-right, opacity;
+}
+
+#output {
+    grid-row: 3;
 }
 
 .writing-visible {
     opacity: initial;
     transition-property: opacity;
-    transition-duration: 0.2s;
+    transition-duration: 0.4s;
 }
 
 .writing-invisible {
     opacity: 0;
     transition-property: opacity;
-    transition-duration: 0.5s;
+    transition-duration: 0.8s;
     transition-delay: 1s;
 }
