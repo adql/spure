@@ -4,7 +4,7 @@
 
 ### Added
 
-- Hide (so far only) UI element while writing (with a mechanism to hide elements that will be added later).
+- Hide UI elements (currently only one) while writing and show them again on mouse move.
 
 ### Changed
 

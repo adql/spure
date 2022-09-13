@@ -7,6 +7,7 @@ import Effect (Effect)
 import Effect.Console (error)
 import React.Basic.DOM as D
 import React.Basic.DOM.Client (createRoot, renderRoot)
+import React.Basic.Events (handler_)
 import React.Basic.Hooks (Component, component, fragment, useState, (/\))
 import React.Basic.Hooks as R
 import Spure (mkSpure)
@@ -40,6 +41,7 @@ mkApp = do
     text /\ setText <- useState []
     
     pure $ D.div { id: "viewport"
+                 , onMouseMove: handler_ $ setWriting \_ -> false
                  , children: [
                    D.main { className: if done then "done" else ""
                           , children: [ D.div { id:"main-ui"
