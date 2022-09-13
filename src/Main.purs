@@ -39,15 +39,18 @@ mkApp = do
     done /\ setDone <- useState false
     text /\ setText <- useState []
     
-    pure $ D.main { className: if done then "done" else ""
-                  , children: [ D.div { id:"main-ui"
-                                      , children: [ spure { setWriting, setText, done }
-                                                  , if not done
-                                                    then doneButton { setDone, writing }
-                                                    else fragment [ saveButton { text }
-                                                                  , resetButton { setDone, setText }
-                                                                  ]
-                                                  ]
-                                      }
-                              , output { text, done }]
-                  }
+    pure $ D.div { id: "viewport"
+                 , children: [
+                   D.main { className: if done then "done" else ""
+                          , children: [ D.div { id:"main-ui"
+                                              , children: [ spure { setWriting, setText, done }
+                                                          , if not done
+                                                            then doneButton { setDone, writing }
+                                                            else fragment [ saveButton { text }
+                                                                          , resetButton { setDone, setText }
+                                                                          ]
+                                                          ]
+                                              }
+                                      , output { text, done }]
+                          }]
+                 }

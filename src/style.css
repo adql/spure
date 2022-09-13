@@ -1,12 +1,14 @@
 @import '../node_modules/modern-normalize/modern-normalize.css';
 
-body {
-    width: 600px;
-    margin: auto;
+#viewport {
+    width: 100vw;
+    height: 100vh;
 }
 
 main {
     margin-top: 200px;
+    width: 600px;
+    margin: auto;
 }
 
 main.done {
