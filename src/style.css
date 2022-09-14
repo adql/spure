@@ -1,5 +1,12 @@
 @import '../node_modules/modern-normalize/modern-normalize.css';
 
+a {
+    color: darkcyan;
+}
+a:visited {
+    color: darkviolet;
+}
+
 #viewport {
     width: 100vw;
     height: 100vh;
