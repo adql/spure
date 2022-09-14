@@ -6,7 +6,7 @@ Previously I have prototyped it in [Racket](https://github.com/adql/spitter).
 
 ## Usage
 
-Write your text in the text box. You cannot make changes! (TODO: allow typo corrections in the current word)
+Write your text in the text box. Except for corrections in the current word, you cannot make any changes!
 
 When you're done, click the _Spure_ button. Your text will be displayed. You can save it and reset the app.
 
