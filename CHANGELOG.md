@@ -5,6 +5,7 @@
 ### Added
 
 - Hide UI elements (currently only one) while writing and show them again on mouse move.
+- Footer
 
 ### Changed
 

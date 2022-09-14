@@ -35,6 +35,7 @@ mkApp = do
   saveButton <- mkSaveButton
   resetButton <- mkResetButton
   output <- mkOutput
+  footer <- mkFooter
   component "App" \_ -> R.do
     writing /\ setWriting <- useState false
     done /\ setDone <- useState false
@@ -42,17 +43,37 @@ mkApp = do
     
     pure $ D.div { id: "viewport"
                  , onMouseMove: handler_ $ setWriting \_ -> false
-                 , children: [
-                   D.main { className: if done then "done" else ""
-                          , children: [ D.div { id:"main-ui"
-                                              , children: [ spure { setWriting, setText, done }
-                                                          , if not done
-                                                            then doneButton { setDone, writing }
-                                                            else fragment [ saveButton { text }
-                                                                          , resetButton { setDone, setText }
-                                                                          ]
-                                                          ]
-                                              }
-                                      , output { text, done }]
-                          }]
+                 , children: [ D.main { className: if done then "done" else ""
+                                      , children: [ D.div { id:"main-ui"
+                                                          , children: [ spure { setWriting, setText, done }
+                                                                      , if not done
+                                                                        then doneButton { setDone, writing }
+                                                                        else fragment [ saveButton { text }
+                                                                                      , resetButton { setDone, setText }
+                                                                                      ]
+                                                                      ]
+                                                          }
+                                                  , output { text, done }]
+                                      }
+                             , footer { writing }
+                             ]
                  }
+
+mkFooter :: Component { writing :: Boolean }
+mkFooter = do
+  component "Footer" \{writing} -> R.do
+    pure $ D.footer { className: if writing then "writing-invisible" else "writing-visible"
+                    , children: [ D.text "Made by Amir Dekel ("
+                                , D.a { href: "https://github.com/adql"
+                                      , children: [ D.text "@adql"]
+                                      }
+                                , D.text ") with "
+                                , D.a { href: "https://www.purescript.org/"
+                                      , children: [ D.text "PureScript" ]
+                                      }
+                                , D.text " // "
+                                , D.a { href: "https://github.com/adql/spure"
+                                      , children: [ D.text "<src>"]
+                                      }
+                                ]
+                    }

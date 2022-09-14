@@ -3,12 +3,14 @@
 #viewport {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 main {
+    flex-grow: 1;
     width: 600px;
-    height: 100vh;
-    margin: auto;
+    margin: 0 auto;
     display: grid;
     grid-template-rows:
         minmax(0, 3fr)
@@ -74,6 +76,14 @@ main.done {
 
 #output {
     grid-row: 3;
+}
+
+footer {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin: 0 auto 0.8em;
+    font-size: smaller;
+    color: #666;
 }
 
 .writing-visible {
