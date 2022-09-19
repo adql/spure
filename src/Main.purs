@@ -8,10 +8,10 @@ import Effect.Console (error)
 import React.Basic.DOM as D
 import React.Basic.DOM.Client (createRoot, renderRoot)
 import React.Basic.Events (handler_)
-import React.Basic.Hooks (Component, component, fragment, useState, (/\))
+import React.Basic.Hooks (Component, component, useState, (/\))
 import React.Basic.Hooks as R
 import Spure (mkSpure)
-import Spure.UI (mkDoneButton, mkOutput, mkResetButton, mkSaveButton)
+import Spure.UI (mkAfterDoneUI, mkDoneButton, mkOutput)
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (toNonElementParentNode)
@@ -32,8 +32,7 @@ mkApp :: Component Unit
 mkApp = do
   spure <- mkSpure
   doneButton <- mkDoneButton
-  saveButton <- mkSaveButton
-  resetButton <- mkResetButton
+  afterDoneUI <- mkAfterDoneUI
   output <- mkOutput
   footer <- mkFooter
   component "App" \_ -> R.do
@@ -48,9 +47,7 @@ mkApp = do
                                                           , children: [ spure { setWriting, setText, done }
                                                                       , if not done
                                                                         then doneButton { setDone, writing }
-                                                                        else fragment [ saveButton { text }
-                                                                                      , resetButton { setDone, setText }
-                                                                                      ]
+                                                                        else afterDoneUI { setDone, setText, text }
                                                                       ]
                                                           }
                                                   , output { text, done }]

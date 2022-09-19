@@ -1,4 +1,8 @@
 module Spure.UI
+       ( mkAfterDoneUI
+       , mkDoneButton
+       , mkOutput
+       )
        where
 
 import Prelude
@@ -13,6 +17,18 @@ import React.Basic.Hooks (Component, component, empty)
 import React.Basic.Hooks as R
 import Utils.FileSaver (saveBlobAs)
 import Web.File.Blob (fromString)
+
+mkAfterDoneUI :: Component { setDone :: (Boolean -> Boolean) -> Effect Unit
+                           , setText :: (Array String -> Array String) -> Effect Unit
+                           , text :: Array String
+                           }
+mkAfterDoneUI = do
+  saveButton <- mkSaveButton
+  resetButton <- mkResetButton
+  component "AfterDoneUI" \{ setDone, setText, text } -> R.do
+    pure $ R.fragment [ saveButton { text }
+                      , resetButton { setDone, setText }
+                      ]
 
 mkDoneButton :: Component { setDone :: (Boolean -> Boolean) -> Effect Unit
                           , writing :: Boolean
