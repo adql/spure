@@ -1,4 +1,4 @@
-module Spure (mkSpure)
+module Spure (mkSpureUI)
        where
 
 import Prelude
@@ -18,6 +18,7 @@ import React.Basic.Events (handler, handler_, merge)
 import React.Basic.Hooks (Component, Hook, Ref, UseEffect, UseRef, coerceHook, component, readRefMaybe, useEffect, useRef)
 import React.Basic.Hooks as R
 import Spure.Internal.InputEvent (inputType)
+import Spure.UI (mkDoneButton)
 import Web.DOM.Node (Node, toEventTarget)
 import Web.Event.Event (Event, preventDefault)
 import Web.Event.EventTarget (addEventListener, eventListener)
@@ -25,6 +26,23 @@ import Web.HTML (HTMLInputElement)
 import Web.HTML.HTMLInputElement as HtmlIE
 import Web.UIEvent.InputEvent (fromEvent)
 import Web.UIEvent.InputEvent.EventTypes (beforeinput)
+
+mkSpureUI :: Component { setWriting :: (Boolean -> Boolean) -> Effect Unit
+                       , setText :: (Array String -> Array String) -> Effect Unit
+                       , setDone :: (Boolean -> Boolean) -> Effect Unit
+                       , writing :: Boolean
+                       , done :: Boolean
+                       }
+mkSpureUI = do
+  spure <- mkSpure
+  doneButton <- mkDoneButton
+  component "SpureUI" \{ setWriting, setText, setDone, writing, done } -> R.do
+    pure $ D.div { id: "spure-ui"
+                 , className: "ui-container " <> if done then "ui-hidden" else "ui-visible"
+                 , children:  [ spure { setWriting, setText, done }
+                              , doneButton { setDone, writing }
+                              ]
+                 }
 
 mkSpure :: Component { setWriting ::
                           (Boolean -> Boolean) -> Effect Unit
@@ -54,7 +72,6 @@ mkSpure = component "Spure" \{setWriting, setText, done} -> R.do
   pure $ D.input { ref: spureRef
                  , id: "spure"
                  , spellCheck: false
-                 , hidden: if done then true else false
                  , onKeyDown: handler (merge { key, nativeEvent }) handleKeyDown
                  , onContextMenu: capture_ $ pure unit
                  , onChange: handler_ $ setWriting $ \_ -> true

@@ -21,14 +21,18 @@ import Web.File.Blob (fromString)
 mkAfterDoneUI :: Component { setDone :: (Boolean -> Boolean) -> Effect Unit
                            , setText :: (Array String -> Array String) -> Effect Unit
                            , text :: Array String
+                           , done :: Boolean
                            }
 mkAfterDoneUI = do
   saveButton <- mkSaveButton
   resetButton <- mkResetButton
-  component "AfterDoneUI" \{ setDone, setText, text } -> R.do
-    pure $ R.fragment [ saveButton { text }
-                      , resetButton { setDone, setText }
-                      ]
+  component "AfterDoneUI" \{ setDone, setText, text, done } -> R.do
+    pure $ D.div { id: "after-done-ui"
+                 , className: "ui-container " <> if done then "ui-visible" else "ui-hidden"
+                 , children: [ saveButton { text }
+                             , resetButton { setDone, setText }
+                             ]
+                 }
 
 mkDoneButton :: Component { setDone :: (Boolean -> Boolean) -> Effect Unit
                           , writing :: Boolean

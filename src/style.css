@@ -30,23 +30,40 @@ main.done {
 }
 
 #main-ui {
-    width: fit-content;
-    margin: 0 auto;
     grid-row: 2;
 }
 
-#main-ui * {
+#main-ui, .ui-container {
+    width: fit-content;
+    margin: auto;
+}
+
+.ui-container {
+    overflow: hidden;
+}
+
+.ui-container * {
     margin: 0 5px 0;
 }
 
-#main-ui button {
+.ui-container button {
     font-size: 20px;
     background: lightgray;
     border-width: 0px;
     border-radius: 5px;
-    margin-bottom: -5px;
+    margin-bottom: 5px;
     padding: 0.2em 0.7em 0.2em;
     color: #444;
+}
+
+.ui-visible {
+    height: fit-content;
+    opacity: initial;
+}
+
+.ui-hidden {
+    height: 0;
+    opacity: 0;
 }
 
 #spure {
@@ -85,14 +102,6 @@ main.done {
     grid-row: 3;
 }
 
-footer {
-    flex-grow: 0;
-    flex-shrink: 0;
-    margin: 0 auto 0.8em;
-    font-size: smaller;
-    color: #666;
-}
-
 .not-writing-visible {
     opacity: initial;
     transition-property: opacity;
@@ -104,4 +113,12 @@ footer {
     transition-property: opacity;
     transition-duration: 0.8s;
     transition-delay: 1s;
+}
+
+footer {
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin: 0 auto 0.8em;
+    font-size: smaller;
+    color: #666;
 }

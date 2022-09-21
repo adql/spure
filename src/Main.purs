@@ -10,8 +10,8 @@ import React.Basic.DOM.Client (createRoot, renderRoot)
 import React.Basic.Events (handler_)
 import React.Basic.Hooks (Component, component, useState, (/\))
 import React.Basic.Hooks as R
-import Spure (mkSpure)
-import Spure.UI (mkAfterDoneUI, mkDoneButton, mkOutput)
+import Spure (mkSpureUI)
+import Spure.UI (mkAfterDoneUI, mkOutput)
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
 import Web.HTML.HTMLDocument (toNonElementParentNode)
@@ -30,8 +30,7 @@ main = do
 
 mkApp :: Component Unit
 mkApp = do
-  spure <- mkSpure
-  doneButton <- mkDoneButton
+  spureUI <- mkSpureUI
   afterDoneUI <- mkAfterDoneUI
   output <- mkOutput
   footer <- mkFooter
@@ -44,10 +43,8 @@ mkApp = do
                  , onMouseMove: handler_ $ setWriting \_ -> false
                  , children: [ D.main { className: if done then "done" else ""
                                       , children: [ D.div { id:"main-ui"
-                                                          , children: [ spure { setWriting, setText, done }
-                                                                      , if not done
-                                                                        then doneButton { setDone, writing }
-                                                                        else afterDoneUI { setDone, setText, text }
+                                                          , children: [ spureUI { setWriting, setText, setDone, writing , done }
+                                                                      , afterDoneUI { setDone, setText, text, done }
                                                                       ]
                                                           }
                                                   , output { text, done }]
