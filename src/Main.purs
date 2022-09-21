@@ -43,6 +43,7 @@ mkApp = do
                  , onMouseMove: handler_ $ setWriting \_ -> false
                  , children: [ D.main { className: if done then "done" else ""
                                       , children: [ D.div { id:"main-ui"
+                                                          , className: if done then "done" else ""
                                                           , children: [ spureUI { setWriting, setText, setDone, writing , done }
                                                                       , afterDoneUI { setDone, setText, text, done }
                                                                       ]
