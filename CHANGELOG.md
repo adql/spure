@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
+- Transitions between working and done UIs
+
+### Changed
+
+- Some component structure change
+- Use padding instead of grid to position the main UI.
+
 ## [0.3.0] 2022-09-14
 
 ### Added
