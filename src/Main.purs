@@ -59,7 +59,7 @@ mkApp = do
 mkFooter :: Component { writing :: Boolean }
 mkFooter = do
   component "Footer" \{writing} -> R.do
-    pure $ D.footer { className: if writing then "writing-invisible" else "writing-visible"
+    pure $ D.footer { className: if writing then "writing-hidden" else "not-writing-visible"
                     , children: [ D.text "Made by Amir Dekel ("
                                 , D.a { href: "https://github.com/adql"
                                       , children: [ D.text "@adql"]

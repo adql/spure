@@ -72,11 +72,11 @@ main.done {
     overflow: hidden;
 }
 
-#done-button.writing-visible {
+#done-button.not-writing-visible {
     width: 4em;
 }
 
-#done-button.writing-invisible {
+#done-button.writing-hidden {
     width: 0;
     padding-left: 0; padding-right: 0;
 }
@@ -93,13 +93,13 @@ footer {
     color: #666;
 }
 
-.writing-visible {
+.not-writing-visible {
     opacity: initial;
     transition-property: opacity;
     transition-duration: 0.4s;
 }
 
-.writing-invisible {
+.writing-hidden {
     opacity: 0;
     transition-property: opacity;
     transition-duration: 0.8s;
