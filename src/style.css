@@ -53,7 +53,6 @@ main {
     background: lightgray;
     border-width: 0px;
     border-radius: 5px;
-    margin-bottom: 5px;
     padding: 0.2em 0.7em 0.2em;
     color: #444;
 }
@@ -70,6 +69,10 @@ main {
     opacity: 0;
     transition-property: height, opacity;
     transition-duration: var(--done-transition-duration);
+}
+
+#spure-ui {
+    display: flex;
 }
 
 #spure {
@@ -90,16 +93,16 @@ main {
     transition: border-color 0.5s 2s;
 }
 
-#done-button {
+#spure-ui-buttons {
     transition-property: width, padding-left, padding-right, opacity;
     overflow: hidden;
 }
 
-#done-button.not-writing-visible {
-    width: 4em;
+#spure-ui-buttons.not-writing-visible {
+    width: 6em;
 }
 
-#done-button.writing-hidden {
+#spure-ui-buttons.writing-hidden {
     width: 0;
     padding-left: 0; padding-right: 0;
 }

@@ -35,11 +35,9 @@ mkAfterDoneUI = do
                  }
 
 mkDoneButton :: Component { setDone :: (Boolean -> Boolean) -> Effect Unit
-                          , writing :: Boolean
                           }
-mkDoneButton = component "SpureButton" \{setDone, writing} -> R.do
+mkDoneButton = component "SpureButton" \{setDone} -> R.do
   pure $ D.button { id: "done-button"
-                  , className: if writing then "writing-hidden" else "not-writing-visible"
                   , onClick: capture_ $ setDone \_ -> true
                   , children: [D.text "Spure!"]
                   }

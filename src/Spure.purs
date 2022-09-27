@@ -40,7 +40,11 @@ mkSpureUI = do
     pure $ D.div { id: "spure-ui"
                  , className: "ui-container " <> if done then "ui-hidden" else "ui-visible"
                  , children:  [ spure { setWriting, setText, done }
-                              , doneButton { setDone, writing }
+                              , D.div { id: "spure-ui-buttons"
+                                      , className: if writing then "writing-hidden" else "not-writing-visible"
+                                      , children: [doneButton { setDone, writing }
+                                                  ]
+                                      }
                               ]
                  }
 
