@@ -2,6 +2,7 @@
 
 :root {
     --done-transition-duration: 0.5s;
+    --main-ui-padding-top: 30vh;
 }
 
 a {
@@ -19,13 +20,28 @@ a:visited {
 }
 
 main {
+    position: relative;
     flex-grow: 1;
     width: 600px;
     margin: 0 auto;
 }
 
+#info-box {
+    position: absolute;
+    top: calc(var(--main-ui-padding-top) * 0.8);
+}
+
+#info-box.hidden {
+    visibility: hidden;
+}
+
+#info-box button {
+    display: block;
+    margin: 0 auto;
+}
+
 #main-ui {
-    padding-top: 30vh;
+    padding-top: var(--main-ui-padding-top);
     transition-property: padding-top;
     transition-duration: var(--done-transition-duration);
 }
@@ -33,6 +49,10 @@ main {
 #main-ui.done {
     padding-top: 1em;
     transition-duration: var(--done-transition-duration);
+}
+
+#main-ui.hidden {
+    filter: blur(3px) brightness(1.2);
 }
 
 #main-ui, .ui-container {
@@ -94,17 +114,28 @@ main {
 }
 
 #spure-ui-buttons {
+    display: flex;
     transition-property: width, padding-left, padding-right, opacity;
     overflow: hidden;
 }
 
 #spure-ui-buttons.not-writing-visible {
-    width: 6em;
+    width: 9em;
 }
 
 #spure-ui-buttons.writing-hidden {
     width: 0;
     padding-left: 0; padding-right: 0;
+}
+
+#info-button {
+    background: transparent;
+    border-width: 0.5mm;
+    border-color: #444;
+    border-style: solid;
+    border-radius: 1em;
+    font-size: x-large;
+    padding: 0.1em 0.55em;
 }
 
 .not-writing-visible {

@@ -1,6 +1,7 @@
 module Spure.UI
        ( mkAfterDoneUI
        , mkDoneButton
+       , mkInfoButton
        , mkOutput
        )
        where
@@ -33,6 +34,14 @@ mkAfterDoneUI = do
                              , resetButton { setDone, setText }
                              ]
                  }
+
+mkInfoButton :: Component { setInfoVisible :: (Boolean -> Boolean) -> Effect Unit
+                          }
+mkInfoButton = component "InfoButton" \{setInfoVisible} -> R.do
+  pure $ D.button { id: "info-button"
+                  , onClick: capture_ $ setInfoVisible not
+                  , children: [ D.text "i" ]
+                  }
 
 mkDoneButton :: Component { setDone :: (Boolean -> Boolean) -> Effect Unit
                           }

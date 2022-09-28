@@ -11,6 +11,7 @@ import React.Basic.Events (handler_)
 import React.Basic.Hooks (Component, component, useState, (/\))
 import React.Basic.Hooks as R
 import Spure (mkSpureUI)
+import Spure.Info (mkInfoBox)
 import Spure.UI (mkAfterDoneUI, mkOutput)
 import Web.DOM.NonElementParentNode (getElementById)
 import Web.HTML (window)
@@ -31,24 +32,30 @@ main = do
 mkApp :: Component Unit
 mkApp = do
   spureUI <- mkSpureUI
+  infoBox <- mkInfoBox
   afterDoneUI <- mkAfterDoneUI
   output <- mkOutput
   footer <- mkFooter
   component "App" \_ -> R.do
     writing /\ setWriting <- useState false
     done /\ setDone <- useState false
+    infoVisible /\ setInfoVisible <- useState false
     text /\ setText <- useState []
     
     pure $ D.div { id: "viewport"
                  , onMouseMove: handler_ $ setWriting \_ -> false
                  , children: [ D.main { className: if done then "done" else ""
                                       , children: [ D.div { id:"main-ui"
-                                                          , className: if done then "done" else ""
-                                                          , children: [ spureUI { setWriting, setText, setDone, writing , done }
+                                                          , className:
+                                                            (if done then "done" else "") <>
+                                                            (if infoVisible then "hidden" else "")
+                                                          , children: [ spureUI { setWriting, setText, setDone, setInfoVisible, writing , done }
                                                                       , afterDoneUI { setDone, setText, text, done }
                                                                       ]
                                                           }
-                                                  , output { text, done }]
+                                                  , output { text, done }
+                                                  , infoBox { infoVisible, setInfoVisible }
+                                                  ]
                                       }
                              , footer { writing }
                              ]

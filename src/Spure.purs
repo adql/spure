@@ -18,7 +18,7 @@ import React.Basic.Events (handler, handler_, merge)
 import React.Basic.Hooks (Component, Hook, Ref, UseEffect, UseRef, coerceHook, component, readRefMaybe, useEffect, useRef)
 import React.Basic.Hooks as R
 import Spure.Internal.InputEvent (inputType)
-import Spure.UI (mkDoneButton)
+import Spure.UI (mkDoneButton, mkInfoButton)
 import Web.DOM.Node (Node, toEventTarget)
 import Web.Event.Event (Event, preventDefault)
 import Web.Event.EventTarget (addEventListener, eventListener)
@@ -30,19 +30,22 @@ import Web.UIEvent.InputEvent.EventTypes (beforeinput)
 mkSpureUI :: Component { setWriting :: (Boolean -> Boolean) -> Effect Unit
                        , setText :: (Array String -> Array String) -> Effect Unit
                        , setDone :: (Boolean -> Boolean) -> Effect Unit
+                       , setInfoVisible :: (Boolean -> Boolean) -> Effect Unit
                        , writing :: Boolean
                        , done :: Boolean
                        }
 mkSpureUI = do
   spure <- mkSpure
   doneButton <- mkDoneButton
-  component "SpureUI" \{ setWriting, setText, setDone, writing, done } -> R.do
+  infoButton <- mkInfoButton
+  component "SpureUI" \{ setWriting, setText, setDone, setInfoVisible, writing, done } -> R.do
     pure $ D.div { id: "spure-ui"
                  , className: "ui-container " <> if done then "ui-hidden" else "ui-visible"
                  , children:  [ spure { setWriting, setText, done }
                               , D.div { id: "spure-ui-buttons"
                                       , className: if writing then "writing-hidden" else "not-writing-visible"
-                                      , children: [doneButton { setDone, writing }
+                                      , children: [ doneButton { setDone }
+                                                  , infoButton { setInfoVisible }
                                                   ]
                                       }
                               ]
