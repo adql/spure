@@ -40,7 +40,7 @@ mkInfoButton :: Component { setInfoVisible :: (Boolean -> Boolean) -> Effect Uni
 mkInfoButton = component "InfoButton" \{setInfoVisible} -> R.do
   pure $ D.button { id: "info-button"
                   , onClick: capture_ $ setInfoVisible not
-                  , children: [ D.text "\?" ]
+                  , children: [ D.text "?" ]
                   }
 
 mkDoneButton :: Component { setDone :: (Boolean -> Boolean) -> Effect Unit
