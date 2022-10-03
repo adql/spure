@@ -2,12 +2,16 @@
 
 ## [Unreleased]
 
-- Transitions between working and done UIs
+### Added
+
+- Info button and popup
+- Transitions between _working_ and _done_ UIs
 
 ### Changed
 
 - Some component structure change
 - Use padding instead of grid to position the main UI.
+- Some restyling
 
 ## [0.3.0] 2022-09-14
 
