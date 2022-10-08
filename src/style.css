@@ -13,7 +13,6 @@ a:visited {
 }
 
 button {
-    font-size: 16px;
     border-width: 0.1px;
     border-radius: 5px;
     padding: 0.3em 1em;
@@ -30,7 +29,7 @@ button {
 main {
     position: relative;
     flex-grow: 1;
-    width: 600px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
@@ -70,6 +69,7 @@ main {
 
 .ui-container {
     overflow: hidden;
+    font-size: 16px;
 }
 
 .ui-container * {
@@ -77,7 +77,6 @@ main {
 }
 
 .ui-visible {
-    height: 40px;
     opacity: initial;
     transition-property: height, opacity;
     transition-duration: var(--done-transition-duration);
@@ -113,31 +112,46 @@ main {
 }
 
 #spure-ui-buttons {
+    width: 8em;
     display: flex;
     align-items: center;
-    transition-property: width, padding-left, padding-right, opacity;
+    transition-property: width, opacity;
     overflow: hidden;
 }
 
 #spure-ui-buttons.not-writing-visible {
-    width: 9em;
 }
 
 #spure-ui-buttons.writing-hidden {
     width: 0;
-    padding-left: 0; padding-right: 0;
+}
+
+@media screen and (max-width: 480px) {
+    #spure-ui {
+        flex-direction: column;
+        align-items: center;
+    }
+    #spure-ui-buttons {
+        flex-direction: column;
+        margin-top: 20vh;
+    }
+    .ui-container {
+        font-size: 24px;
+    }
+    #spure-ui-buttons * {
+        margin-top: 5vh;
+    }
 }
 
 #info-button {
-    width: 28px;
-    height: 28px;
+    width: 1.8em;
+    height: 1.8em;
     background: transparent;
     border-width: 0.5mm;
     border-color: #888;
     border-style: ridge;
     border-width: 0.1px;
-    border-radius: 14px;
-    font-size: 16px;
+    border-radius: 1em;
     font-family: monospace;
     color: #555;
     padding: 0;
@@ -158,6 +172,10 @@ main {
     transition-property: opacity;
     transition-duration: 0.8s;
     transition-delay: 1s;
+}
+
+#output {
+    margin: 0 0.5em;
 }
 
 footer {

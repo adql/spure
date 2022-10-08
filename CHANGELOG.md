@@ -1,5 +1,11 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- Responsive design with mobile adaptations
+
 ## [0.4.0] 2022-10-03
 
 ### Added
