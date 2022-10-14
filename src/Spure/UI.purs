@@ -72,7 +72,8 @@ mkSaveButton = component "SaveButton" \{text} -> R.do
 mkOutput :: Component { text::Array String, done::Boolean}
 mkOutput = component "Output" \props -> R.do
   pure $ if props.done
-         then D.div { id:"output"
+         then D.div { id: "output"
                     , children: map (D.p_ <<< singleton <<< D.text) props.text
+                    , dir: "auto"
                     }
          else empty

@@ -5,6 +5,7 @@
 ### Added
 
 - Responsive design with mobile adaptations
+- Trivial support for rtl direction
 
 ## [0.4.0] 2022-10-03
 

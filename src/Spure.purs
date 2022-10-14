@@ -83,6 +83,7 @@ mkSpure = component "Spure" \{setWriting, setText, done} -> R.do
                  , onContextMenu: capture_ $ pure unit
                  , onChange: handler_ $ setWriting $ \_ -> true
                  , onBlur: handler_ $ setWriting $ \_ -> false
+                 , dir: "auto"
                  , required: true
                  , autoFocus: true
                  }
