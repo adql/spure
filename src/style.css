@@ -8,9 +8,9 @@
 a {
     color: darkcyan;
 }
-a:visited {
-    color: darkviolet;
-}
+/* a:visited { */
+/*     color: darkviolet; */
+/* } */
 
 button {
     border-width: 0.1px;
