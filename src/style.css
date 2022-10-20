@@ -42,6 +42,12 @@ main {
     visibility: hidden;
 }
 
+#info-box .version-info {
+    font-variant: all-small-caps;
+    font-size: small;
+    opacity: 60%;
+}
+
 #info-box button {
     display: block;
     margin: 0 auto;
