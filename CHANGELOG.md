@@ -6,6 +6,7 @@
 
 - Responsive design with mobile adaptations
 - Trivial support for rtl direction
+- More info about (lack of) mobile support, privacy notice
 
 ## [0.4.0] 2022-10-03
 
