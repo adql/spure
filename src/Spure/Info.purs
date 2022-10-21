@@ -31,7 +31,7 @@ mkInfoBox = component "InfoBox" \{infoVisible, setInfoVisible} -> R.do
                                   , D.text " The app runs completely local in your browser, including all the typed text. No data is sent to any server and no cookies are used."
                                   ]
                            , D.p { className: "version-info"
-                                 , children: [ D.text "Spure v0.4.0 <"
+                                 , children: [ D.text "Spure v0.5.0 <"
                                              , D.a { href: "https://github.com/adql/spure"
                                                    , children: [ D.text "source" ]
                                                    }
