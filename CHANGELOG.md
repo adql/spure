@@ -10,6 +10,10 @@
   - no full mobile support
   - privacy notice
   - version info
+  
+### Changed
+
+- Minor style change
 
 ## [0.4.0] 2022-10-03
 
